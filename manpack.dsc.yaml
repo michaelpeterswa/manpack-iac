@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+# Apply with:  winget configure -f manpack.dsc.yaml --accept-configuration-agreements
+# Every resource is idempotent: already-installed packages are skipped.
+# Comment out anything you don't want.
+properties:
+  configurationVersion: 0.2.0
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Require Windows 10 22H2 or later
+        allowPrerelease: true
+      settings:
+        MinVersion: '10.0.19045'
+  resources:
+    # --- Digital modes -------------------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: wsjtx
+      directives: { description: WSJT-X, allowPrerelease: true }
+      settings: { id: JoeTaylor.WSJT-X, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: jtdx
+      directives: { description: JTDX, allowPrerelease: true }
+      settings: { id: JTDX.JTDX, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: js8call
+      directives: { description: JS8Call (improved fork), allowPrerelease: true }
+      settings: { id: JS8Call-improved.JS8Call-improved, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: gridtracker
+      directives: { description: GridTracker2, allowPrerelease: true }
+      settings: { id: TheGridTrackerTeam.GridTracker2, source: winget }
+
+    # --- NBEMS / fl-suite ----------------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: fldigi
+      directives: { description: fldigi, allowPrerelease: true }
+      settings: { id: w1hkj.fldigi, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: flrig
+      directives: { description: flrig, allowPrerelease: true }
+      settings: { id: w1hkj.flrig, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: flmsg
+      directives: { description: flmsg, allowPrerelease: true }
+      settings: { id: w1hkj.flmsg, source: winget }
+
+    # --- Rig control / logging ----------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: omnirig
+      directives: { description: OmniRig, allowPrerelease: true }
+      settings: { id: AfreetSoftware.OmniRig, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: log4om
+      directives: { description: Log4OM 2, allowPrerelease: true }
+      settings: { id: Log4OM2.Log4OM2, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: tqsl
+      directives: { description: ARRL TrustedQSL (LoTW), allowPrerelease: true }
+      settings: { id: AmericanRadioRelayLeague.TrustedQSL, source: winget }
+
+    # --- SDR -----------------------------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: sdrpp
+      directives: { description: SDR++, allowPrerelease: true }
+      settings: { id: AlexandreRouma.SDRPlusPlus, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: zadig
+      directives: { description: Zadig (USB driver installer for RTL-SDR etc.), allowPrerelease: true }
+      settings: { id: akeo.ie.Zadig, source: winget }
+
+    # --- Winlink / satellites ------------------------------------------------
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: winlink
+      directives: { description: Winlink Express, allowPrerelease: true }
+      settings: { id: Winlink.WinlinkExpress, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: gpredict
+      directives: { description: Gpredict, allowPrerelease: true }
+      settings: { id: AlexandruCsete.Gpredict, source: winget }
