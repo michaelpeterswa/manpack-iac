@@ -5,7 +5,7 @@ Declarative install of ham radio software on Windows.
 | File | What it does |
 |---|---|
 | `manpack.dsc.yaml` | WinGet Configuration (DSC): apps in the WinGet repo |
-| `choco-packages.config` | Chocolatey: apps WinGet doesn't have |
+| `choco-packages.config` | Chocolatey: apps WinGet doesn't have, or whose WinGet installers are broken |
 | `bootstrap.ps1` | Updates WinGet if needed, then applies both of the above |
 
 ## Usage

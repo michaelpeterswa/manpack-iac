@@ -12,6 +12,17 @@ properties:
       settings:
         MinVersion: '10.0.19045'
   resources:
+    # --- Runtimes ------------------------------------------------------------
+    # Declared explicitly: WinGet's automatic dependency install fails under DSC.
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vcredist-x64
+      directives: { description: Visual C++ 2015+ runtime (x64), allowPrerelease: true }
+      settings: { id: Microsoft.VCRedist.2015+.x64, source: winget }
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vcredist-x86
+      directives: { description: Visual C++ 2015+ runtime (x86), allowPrerelease: true }
+      settings: { id: Microsoft.VCRedist.2015+.x86, source: winget }
+
     # --- Digital modes -------------------------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: wsjtx
@@ -30,29 +41,17 @@ properties:
       directives: { description: GridTracker2, allowPrerelease: true }
       settings: { id: TheGridTrackerTeam.GridTracker2, source: winget }
 
-    # --- NBEMS / fl-suite ----------------------------------------------------
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: fldigi
-      directives: { description: fldigi, allowPrerelease: true }
-      settings: { id: w1hkj.fldigi, source: winget }
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: flrig
-      directives: { description: flrig, allowPrerelease: true }
-      settings: { id: w1hkj.flrig, source: winget }
+    # --- NBEMS / fl-suite (fldigi and flrig are in choco-packages.config) -----
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: flmsg
       directives: { description: flmsg, allowPrerelease: true }
       settings: { id: w1hkj.flmsg, source: winget }
 
-    # --- Rig control / logging ----------------------------------------------
+    # --- Rig control / logging (Log4OM is in choco-packages.config) ---------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: omnirig
       directives: { description: OmniRig, allowPrerelease: true }
       settings: { id: AfreetSoftware.OmniRig, source: winget }
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: log4om
-      directives: { description: Log4OM 2, allowPrerelease: true }
-      settings: { id: Log4OM2.Log4OM2, source: winget }
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: tqsl
       directives: { description: ARRL TrustedQSL (LoTW), allowPrerelease: true }
@@ -61,6 +60,7 @@ properties:
     # --- SDR -----------------------------------------------------------------
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: sdrpp
+      dependsOn: [vcredist-x64]
       directives: { description: SDR++, allowPrerelease: true }
       settings: { id: AlexandreRouma.SDRPlusPlus, source: winget }
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -75,5 +75,6 @@ properties:
       settings: { id: Winlink.WinlinkExpress, source: winget }
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: gpredict
+      dependsOn: [vcredist-x86]
       directives: { description: Gpredict, allowPrerelease: true }
       settings: { id: AlexandruCsete.Gpredict, source: winget }
