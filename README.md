@@ -6,7 +6,10 @@ Declarative install of ham radio software on Windows.
 |---|---|
 | `manpack.dsc.yaml` | WinGet Configuration (DSC): apps in the WinGet repo |
 | `choco-packages.config` | Chocolatey: apps WinGet doesn't have, or whose WinGet installers are broken |
-| `bootstrap.ps1` | Updates WinGet if needed, then applies both of the above |
+| `install-vara.ps1` | VARA HF/FM/SAT/Chat/Terminal (latest from downloads.winlink.org) and VarAC (from `installers\`) |
+| `bootstrap.ps1` | Updates WinGet if needed, then runs all of the above |
+
+VARA products that are already installed are never reinstalled, since that could overwrite `VARA.ini` and your registration key; the script only reports newer versions. VarAC's installer is emailed on request, so put it in [`installers\`](installers/README.md) before running.
 
 ## Usage
 ```powershell
@@ -16,7 +19,6 @@ Set-ExecutionPolicy -Scope Process Bypass; .\bootstrap.ps1
 To preview without installing anything: `winget configure show -f manpack.dsc.yaml`
 
 ## Not automated yet (no package, or silent install unverified)
-- **VARA HF / FM**: downloads.winlink.org/VARA Products/ (zip containing a setup exe; probably Inno Setup `/VERYSILENT`)
 - **DXLab Launcher**: dxlabsuite.com (self-extractor, no known silent mode)
 - **Direwolf**: github.com/wb2osz/direwolf/releases (zip only; extract it)
 - **QLog**: github.com/foldynl/QLog/releases (Qt IFW: `install --accept-licenses --default-answer --confirm-command`)

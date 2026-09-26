@@ -45,4 +45,7 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
 choco install .\choco-packages.config -y --no-progress
 if ($LASTEXITCODE -notin 0, 3010) { throw "choco install failed ($LASTEXITCODE)" }
 
+# 4. VARA modems and VarAC (no package in WinGet or Chocolatey).
+& .\install-vara.ps1
+
 Write-Host "`nDone. See README.md for the apps that still need a manual install."
